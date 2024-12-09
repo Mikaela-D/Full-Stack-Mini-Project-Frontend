@@ -51,9 +51,9 @@ function NewMeetupForm(props) {
         <div className={classes.control}>
           <label htmlFor="category">Category</label>
           <select id="category" required ref={categoryInputRef}>
-            <option value="food">Food</option>
-            <option value="clothes">Clothes</option>
-            <option value="furniture">Furniture</option>
+            <option value="Food">Food</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Furniture">Furniture</option>
           </select>
         </div>
         <div className={classes.control}>

@@ -5,9 +5,11 @@ function MeetupDetail(props) {
     <section className={classes.detail}>
       <img src={props.image} alt={props.title} />
       <h1>{props.title}</h1>
-      <price>{props.price}</price>
-      <category>{props.category}</category>
-      <p>{props.description}</p>
+      <price>Price: {props.price}€</price>
+      <p>
+        <category>Category: {props.category}</category>
+      </p>
+      <p>Description: {props.description}</p>
     </section>
   );
 }

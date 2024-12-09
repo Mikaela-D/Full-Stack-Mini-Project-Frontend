@@ -1,8 +1,17 @@
 import { useCart } from "../components/generic/CartContext";
+import { useState } from "react";
 import classes from "../styles/Cart.module.css";
 
 export default function Cart() {
-  const { cart } = useCart(); // Get cart from context
+  const { cart, setCart } = useCart();
+  const [purchasedItems, setPurchasedItems] = useState([]);
+
+  const handleBuy = (item) => {
+    const updatedCart = cart.filter((cartItem) => cartItem !== item);
+    setCart(updatedCart);
+
+    setPurchasedItems((prevItems) => [...prevItems, item]);
+  };
 
   return (
     <div className={classes.cart}>
@@ -12,13 +21,37 @@ export default function Cart() {
       ) : (
         <ul>
           {cart.map((item, index) => (
-            <li key={index}>
+            <li key={index} className={classes.cartItem}>
               <img src={item.image} alt={item.title} />
-              <h3>{item.title}</h3>
-              <p>{item.price}€</p>
+              <div className={classes.itemDetails}>
+                <h3>{item.title}</h3>
+                <p>{item.price}€</p>
+                <button
+                  onClick={() => handleBuy(item)}
+                  className={classes.buyButton}
+                >
+                  Buy
+                </button>
+              </div>
             </li>
           ))}
         </ul>
+      )}
+
+      {purchasedItems.length > 0 && (
+        <div className={classes.purchasedMessage}>
+          <h2>Purchased Items</h2>
+          <ul>
+            {purchasedItems.map((item, index) => (
+              <li key={index}>
+                <span>
+                  {item.title} - {item.price}€
+                </span>{" "}
+                <em>(Purchased)</em>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

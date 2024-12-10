@@ -39,16 +39,12 @@ function NewMeetupForm(props) {
   return (
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
-      <div className={classes.control}>
-          <label htmlFor="Id">
-            Product Id (must be unique)
-          </label>
+        <div className={classes.control}>
+          <label htmlFor="Id">Product Id (must be unique)</label>
           <input type="number" required id="Id" ref={IdInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="title">
-            Product Name 
-          </label>
+          <label htmlFor="title">Product Name</label>
           <input type="text" required id="title" ref={titleInputRef} />
         </div>
         <div className={classes.control}>
@@ -60,7 +56,7 @@ function NewMeetupForm(props) {
           <input type="number" required id="price" ref={priceInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="quantity">Quantity</label> 
+          <label htmlFor="quantity">Quantity</label>
           <input type="number" required id="quantity" ref={quantityInputRef} />
         </div>
         <div className={classes.control}>

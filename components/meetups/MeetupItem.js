@@ -54,7 +54,11 @@ function MeetupItem(props) {
           </div>
           <div>
             <p>
-              <strong>{props.quantity > 0 ? `${props.quantity} items left` : "Out of stock"}</strong>
+              <strong>
+                {props.quantity > 0
+                  ? `${props.quantity} items left`
+                  : "Out of stock"}
+              </strong>
             </p>
           </div>
         </div>
@@ -68,11 +72,13 @@ function MeetupItem(props) {
               disabled={props.quantity <= 0}
             >
               {/* Generate options from 1 to available stock */}
-              {Array.from({ length: props.quantity }, (_, i) => i + 1).map((qty) => (
-                <option key={qty} value={qty}>
-                  {qty}
-                </option>
-              ))}
+              {Array.from({ length: props.quantity }, (_, i) => i + 1).map(
+                (qty) => (
+                  <option key={qty} value={qty}>
+                    {qty}
+                  </option>
+                )
+              )}
             </select>
           </div>
           <button onClick={showDetailsHandler}>Show Details</button>

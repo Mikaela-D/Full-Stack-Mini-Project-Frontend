@@ -1,7 +1,6 @@
 import classes from "./ProductsPopup.module.css";
 import { useCart } from "../generic/CartContext";
 import { useRouter } from "next/router";
-import MeetupId from "../../pages/[meetupId]";
 
 const ProductsPopup = ({ category, products, onClose }) => {
   const { addToCart } = useCart();
@@ -11,9 +10,6 @@ const ProductsPopup = ({ category, products, onClose }) => {
     (product) => product.category === category
   );
 
-
-
-  // Handler to add product to cart
   const addToCartHandler = (product) => {
     addToCart({
       id: product.id,
@@ -22,6 +18,7 @@ const ProductsPopup = ({ category, products, onClose }) => {
       price: product.price,
       category: product.category,
     });
+    onClose();
     router.push("/cart");
   };
 
@@ -47,10 +44,7 @@ const ProductsPopup = ({ category, products, onClose }) => {
                       <strong>Description:</strong> {product.description}
                     </p>
                     <div className={classes.actions}>
-    
-                      <button
-                        onClick={() => addToCartHandler(product)}
-                      >
+                      <button onClick={() => addToCartHandler(product)}>
                         Add to Cart
                       </button>
                     </div>

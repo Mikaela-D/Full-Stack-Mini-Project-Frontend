@@ -31,7 +31,7 @@ function MeetupItem(props) {
         </div>
         <div className={classes.content}>
           <h3>{props.title}</h3>
-          <price>{props.price}€</price>
+          <price>€{props.price}</price>
           <div>
             <category>{props.category}</category>
           </div>

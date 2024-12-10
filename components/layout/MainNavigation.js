@@ -37,6 +37,9 @@ function MainNavigation() {
           <li>
             <Link href="/new-meetup">Add New Product</Link>
           </li>
+          <li>
+            <Link href="/cart">Your Cart</Link>
+          </li>
         </ul>
       </nav>
     </header>

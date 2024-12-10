@@ -14,15 +14,15 @@ function MainNavigation() {
   // Timer State
   const [timeLeft, setTimeLeft] = useState(null);
 
-  // 🎄 Set the sale duration (can be dynamically set using globalCtx or props)
-  const SALE_DURATION_HOURS = 48; // Example: Set a 48-hour sale
-  // 🛠️ Use useRef to ensure the end time is calculated only ONCE
+ 
+  const SALE_DURATION_HOURS = 48; 
+  
   const SALE_END_TIME = useRef(new Date().getTime() + SALE_DURATION_HOURS * 60 * 60 * 1000);
 
   useEffect(() => {
     function updateCountdown() {
       const now = new Date().getTime();
-      const difference = SALE_END_TIME.current - now; // 🛠️ Use the consistent ref value
+      const difference = SALE_END_TIME.current - now; 
 
       if (difference <= 0) {
         setTimeLeft("Sale Ended!");
@@ -37,7 +37,7 @@ function MainNavigation() {
 
     // Update every second
     const timerInterval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // Run immediately to avoid 1s delay
+    updateCountdown(); 
 
     // Cleanup on component unmount
     return () => clearInterval(timerInterval);
@@ -61,7 +61,7 @@ function MainNavigation() {
       <HamMenu toggleMenuHide={() => toggleMenuHide()} />
       <HamMenuFAB toggleMenuHide={() => toggleMenuHide()} />
       
-      {/* 🎄 Sale Countdown Timer */}
+      
       <div className={classes.saleTimer}>
         <p>🎅 Christmas Sale Ends In: {timeLeft ? timeLeft : "Loading..."}</p>
       </div>

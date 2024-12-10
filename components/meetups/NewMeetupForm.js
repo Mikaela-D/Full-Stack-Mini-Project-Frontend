@@ -4,28 +4,33 @@ import Card from "../ui/Card";
 import classes from "./NewMeetupForm.module.css";
 
 function NewMeetupForm(props) {
+  const IdInputRef = useRef();
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const priceInputRef = useRef();
   const categoryInputRef = useRef();
   const descriptionInputRef = useRef();
+  const quantityInputRef = useRef();
 
   function submitHandler(event) {
     event.preventDefault();
 
+    const enteredId = IdInputRef.current.value;
     const enteredTitle = titleInputRef.current.value;
     const enteredImage = imageInputRef.current.value;
     const enteredPrice = priceInputRef.current.value;
     const enteredCategory = categoryInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
+    const enteredQuantity = quantityInputRef.current.value;
 
     const meetupData = {
-      meetingId: enteredTitle,
+      meetingId: enteredId,
       title: enteredTitle,
       image: enteredImage,
       price: enteredPrice,
       category: enteredCategory,
       description: enteredDescription,
+      quantity: enteredQuantity,
     };
 
     props.onAddMeetup(meetupData);
@@ -34,9 +39,15 @@ function NewMeetupForm(props) {
   return (
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
+      <div className={classes.control}>
+          <label htmlFor="Id">
+            Product Id (must be unique)
+          </label>
+          <input type="number" required id="Id" ref={IdInputRef} />
+        </div>
         <div className={classes.control}>
           <label htmlFor="title">
-            Product Name (must be unique: it's the product ID)
+            Product Name 
           </label>
           <input type="text" required id="title" ref={titleInputRef} />
         </div>
@@ -47,6 +58,10 @@ function NewMeetupForm(props) {
         <div className={classes.control}>
           <label htmlFor="price">Price</label>
           <input type="number" required id="price" ref={priceInputRef} />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="quantity">Quantity</label> 
+          <input type="number" required id="quantity" ref={quantityInputRef} />
         </div>
         <div className={classes.control}>
           <label htmlFor="category">Category</label>

@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import GlobalContext from "../../pages/store/globalContext";
 import ProductsPopup from "../generic/ProductsPopup";
 
-export default function HamMenuContent({ onClose }) {
+export default function HamMenuContent({ onClose = () => {} }) {
   const globalCtx = useContext(GlobalContext);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [popupToggle, setPopupToggle] = useState(false);
@@ -23,7 +23,9 @@ export default function HamMenuContent({ onClose }) {
   const closeMenu = () => {
     globalCtx.updateGlobals({ cmd: "hideHamMenu", newVal: true });
     setPopupToggle(false);
-    onClose();
+    if (typeof onClose === "function") {
+      onClose();
+    }
   };
 
   if (globalCtx.theGlobalObject.hideHamMenu) {

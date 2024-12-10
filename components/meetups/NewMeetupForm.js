@@ -10,7 +10,7 @@ function NewMeetupForm(props) {
   const priceInputRef = useRef();
   const categoryInputRef = useRef();
   const descriptionInputRef = useRef();
-  
+  const quantityInputRef = useRef();
 
   function submitHandler(event) {
     event.preventDefault();
@@ -21,6 +21,7 @@ function NewMeetupForm(props) {
     const enteredPrice = priceInputRef.current.value;
     const enteredCategory = categoryInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
+    const enteredQuantity = quantityInputRef.current.value;
 
     const meetupData = {
       meetingId: enteredId,
@@ -29,6 +30,7 @@ function NewMeetupForm(props) {
       price: enteredPrice,
       category: enteredCategory,
       description: enteredDescription,
+      quantity: enteredQuantity,
     };
 
     props.onAddMeetup(meetupData);
@@ -56,6 +58,10 @@ function NewMeetupForm(props) {
         <div className={classes.control}>
           <label htmlFor="price">Price</label>
           <input type="number" required id="price" ref={priceInputRef} />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="quantity">Quantity</label> 
+          <input type="number" required id="quantity" ref={quantityInputRef} />
         </div>
         <div className={classes.control}>
           <label htmlFor="category">Category</label>

@@ -12,6 +12,7 @@ function MeetupList(props) {
           title={meetup.title}
           price={meetup.price}
           category={meetup.category}
+          quantity={meetup.quantity}
         />
       ))}
     </ul>

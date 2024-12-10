@@ -6,31 +6,43 @@ import ProductsPopup from "../generic/ProductsPopup";
 export default function HamMenuContent({ onClose }) {
   const globalCtx = useContext(GlobalContext);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [popupToggle, setPopupToggle] = useState(false);
 
-  // Define categories
   const categories = ["Food", "Clothes", "Furniture"];
 
-  // Handle category click to show popup
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
+    setPopupToggle(true);
   };
 
-  // Close the popup
   const handleClosePopup = () => {
     setSelectedCategory(null);
+    setPopupToggle(false);
   };
+
+  const closeMenu = () => {
+    globalCtx.updateGlobals({ cmd: "hideHamMenu", newVal: true });
+    setPopupToggle(false);
+    onClose();
+  };
+
+  if (globalCtx.theGlobalObject.hideHamMenu) {
+    return null;
+  }
 
   return (
     <>
-      {/* This div is the background that closes the menu when clicked */}
-      <div className={classes.background} onClick={onClose}>
-        <div className={classes.mainContent}>
+      <div className={classes.background} onClick={closeMenu}>
+        <div
+          className={classes.mainContent}
+          onClick={(e) => e.stopPropagation()}
+        >
           {/* Display categories */}
           {categories.map((category, index) => (
             <div
               key={index}
               className={classes.menuItem}
-              onClick={() => handleCategoryClick(category)} // Handle category click
+              onClick={() => handleCategoryClick(category)}
             >
               {category}
             </div>
@@ -38,8 +50,7 @@ export default function HamMenuContent({ onClose }) {
         </div>
       </div>
 
-      {/* Show the products in the selected category if one is selected */}
-      {selectedCategory && (
+      {popupToggle && selectedCategory && (
         <ProductsPopup
           category={selectedCategory}
           products={globalCtx.theGlobalObject.meetings}

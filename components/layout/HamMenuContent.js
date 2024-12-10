@@ -39,7 +39,6 @@ export default function HamMenuContent({ onClose = () => {} }) {
           className={classes.mainContent}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Display categories */}
           {categories.map((category, index) => (
             <div
               key={index}

@@ -26,8 +26,8 @@ export default function Cart() {
               <div className={classes.itemDetails}>
                 <h3>{item.title}</h3>
                 <p>Price: {item.price}€</p>
-                <p>Quantity: {item.quantity}</p> {/* Display selected quantity */}
-                <p>Total: {item.price * item.quantity}€</p> {/* Calculate total */}
+                <p>Quantity: {item.quantity}</p>
+                <p>Total: {item.price * item.quantity}€</p>
                 <button
                   onClick={() => handleBuy(item)}
                   className={classes.buyButton}

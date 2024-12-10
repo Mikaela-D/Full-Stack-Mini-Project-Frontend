@@ -16,7 +16,7 @@ function MeetupItem(props) {
       price: props.price,
       category: props.category,
     });
-    router.push("/cart"); // Navigate to cart page after adding the product
+    router.push("/cart");
   }
 
   function showDetailsHandler() {
@@ -39,7 +39,6 @@ function MeetupItem(props) {
         <div className={classes.actions}>
           <button onClick={showDetailsHandler}>Show Details</button>
           <button onClick={addToCartHandler}>Add to Cart</button>{" "}
-          {/* Add to Cart button */}
         </div>
       </Card>
     </li>

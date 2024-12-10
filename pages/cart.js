@@ -7,7 +7,7 @@ export default function Cart() {
   const [purchasedItems, setPurchasedItems] = useState([]);
 
   const handleBuy = (item) => {
-    const updatedCart = cart.filter((cartItem) => cartItem !== item);
+    const updatedCart = cart.filter((cartItem) => cartItem.id !== item.id);
     setCart(updatedCart);
 
     setPurchasedItems((prevItems) => [...prevItems, item]);
@@ -25,7 +25,9 @@ export default function Cart() {
               <img src={item.image} alt={item.title} />
               <div className={classes.itemDetails}>
                 <h3>{item.title}</h3>
-                <p>{item.price}€</p>
+                <p>Price: {item.price}€</p>
+                <p>Quantity: {item.quantity}</p> {/* Display selected quantity */}
+                <p>Total: {item.price * item.quantity}€</p> {/* Calculate total */}
                 <button
                   onClick={() => handleBuy(item)}
                   className={classes.buyButton}
@@ -45,7 +47,8 @@ export default function Cart() {
             {purchasedItems.map((item, index) => (
               <li key={index}>
                 <span>
-                  {item.title} - {item.price}€
+                  {item.title} - {item.price}€ x {item.quantity} ={" "}
+                  {item.price * item.quantity}€
                 </span>{" "}
                 <em>(Purchased)</em>
               </li>

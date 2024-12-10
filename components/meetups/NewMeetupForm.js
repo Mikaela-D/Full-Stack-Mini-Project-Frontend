@@ -69,6 +69,7 @@ function NewMeetupForm(props) {
             <option value="Food">Food</option>
             <option value="Clothes">Clothes</option>
             <option value="Furniture">Furniture</option>
+            <option value="Miscellaneous">Miscellaneous</option>
           </select>
         </div>
         <div className={classes.control}>

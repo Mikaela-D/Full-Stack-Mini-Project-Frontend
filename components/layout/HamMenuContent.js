@@ -8,7 +8,7 @@ export default function HamMenuContent({ onClose = () => {} }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [popupToggle, setPopupToggle] = useState(false);
 
-  const categories = ["Food", "Clothes", "Furniture"];
+  const categories = ["Food", "Clothes", "Furniture", "Miscellaneous"];
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);

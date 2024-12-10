@@ -34,15 +34,21 @@
   font: inherit;
   cursor: pointer;
   color:  #1a2920;
-  border: 1px solid #77002e;
-  background-color: transparent;
-  padding: 0.5rem 1.5rem;
+  border: 3px solid #880437;
+  background-color: thistle;
+  transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+  font-size: 1rem;
   border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+  margin: 4px;
 }
 
 .actions button:hover,
 .actions button:active {
-  background-color: #ffe2ed;
+  background-color: #77002e;
+  color: white;
+  border-color: #66002a;
+  transform: translateY(-2px);
 }
 
 .actions select {

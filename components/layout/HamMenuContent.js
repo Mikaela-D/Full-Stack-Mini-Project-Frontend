@@ -1,40 +1,64 @@
-import classes from './HamMenuContent.module.css'
-import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
-import GlobalContext from "../../pages/store/globalContext"
+import classes from "./HamMenuContent.module.css";
+import { useState, useContext } from "react";
+import GlobalContext from "../../pages/store/globalContext";
+import ProductsPopup from "../generic/ProductsPopup";
 
-export default function HamMenuContent(props) {
-    const globalCtx = useContext(GlobalContext)
-    const router = useRouter()
-    let [popupToggle, setPopupToggle] = useState(false)
+export default function HamMenuContent({ onClose = () => {} }) {
+  const globalCtx = useContext(GlobalContext);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [popupToggle, setPopupToggle] = useState(false);
 
-    if (globalCtx.theGlobalObject.hideHamMenu) {
-        return null
+  const categories = ["Food", "Clothes", "Furniture", "Miscellaneous"];
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    setPopupToggle(true);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedCategory(null);
+    setPopupToggle(false);
+  };
+
+  const closeMenu = () => {
+    globalCtx.updateGlobals({ cmd: "hideHamMenu", newVal: true });
+    setPopupToggle(false);
+    if (typeof onClose === "function") {
+      onClose();
     }
+  };
 
-    function clicked(webAddress) {
-        globalCtx.updateGlobals({ cmd: 'hideHamMenu', newVal: true })
-        router.push(webAddress)
-    }
+  if (globalCtx.theGlobalObject.hideHamMenu) {
+    return null;
+  }
 
-    function closeMe() {
-        globalCtx.updateGlobals({ cmd: 'hideHamMenu', newVal: true })
-        if (popupToggle == true) {
-            setPopupToggle(false)
-        } else {
-            setPopupToggle(true)
-        }
-    }
-
-    let contentJsx = props.contents.map((item, index) => (  //  [{title: 'Meeting 1', webAddress: '/meet1'}, {title: 'Meeting 2', webAddress: '/meet2'}]
-        <div className={classes.menuItem} key={index} onClick={() => clicked(item.webAddress)} >{item.title} </div>
-    ))
-
-    return (
-        <div className={classes.background} onClick={() => closeMe()} >
-            <div className={classes.mainContent} >
-                {contentJsx}
+  return (
+    <>
+      <div className={classes.background} onClick={closeMenu}>
+        <div
+          className={classes.mainContent}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Display categories */}
+          {categories.map((category, index) => (
+            <div
+              key={index}
+              className={classes.menuItem}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category}
             </div>
+          ))}
         </div>
-    );
+      </div>
+
+      {popupToggle && selectedCategory && (
+        <ProductsPopup
+          category={selectedCategory}
+          products={globalCtx.theGlobalObject.meetings}
+          onClose={handleClosePopup}
+        />
+      )}
+    </>
+  );
 }

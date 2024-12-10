@@ -1,5 +1,5 @@
-import MeetupItem from './MeetupItem';
-import classes from './MeetupList.module.css';
+import MeetupItem from "./MeetupItem";
+import classes from "./MeetupList.module.css";
 
 function MeetupList(props) {
   return (
@@ -10,7 +10,9 @@ function MeetupList(props) {
           id={meetup.meetingId}
           image={meetup.image}
           title={meetup.title}
-          address={meetup.address}
+          price={meetup.price}
+          category={meetup.category}
+          quantity={meetup.quantity}
         />
       ))}
     </ul>
